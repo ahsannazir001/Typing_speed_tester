@@ -1,0 +1,26 @@
+[
+  {
+    "date": "2026-10-03",
+    "time": "20:15:18",
+    "difficulty": "Easy",
+    "duration": 60,
+    "raw_wpm": 33.5,
+    "net_wpm": 0,
+    "accuracy": 35.9,
+    "key_hits": 78,
+    "backspaces": 0,
+    "errors": 50
+  },
+  {
+    "date": "2026-10-03",
+    "time": "20:32:50",
+    "difficulty": "Easy",
+    "duration": 60,
+    "raw_wpm": 2.2,
+    "net_wpm": 0,
+    "accuracy": 18.2,
+    "key_hits": 11,
+    "backspaces": 0,
+    "errors": 9
+  }
+]

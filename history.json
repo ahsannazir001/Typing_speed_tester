@@ -22,5 +22,17 @@
     "key_hits": 11,
     "backspaces": 0,
     "errors": 9
+  },
+  {
+    "date": "2026-10-05",
+    "time": "07:56:37",
+    "difficulty": "Medium",
+    "duration": 60,
+    "raw_wpm": 0.0,
+    "net_wpm": 0,
+    "accuracy": 0.0,
+    "key_hits": 0,
+    "backspaces": 0,
+    "errors": 0
   }
 ]

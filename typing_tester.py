@@ -17,6 +17,7 @@ Features:
 Run:  python typing_tester.py
 """
 
+import base64
 import json
 import os
 import random
@@ -31,6 +32,8 @@ def resource_path(relative):
     """Resolve a resource path whether running as script or frozen exe."""
     base = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base, relative)
+_ICON_B64 = "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"
+
 
 
 # ---------------------------------------------------------------------------
@@ -185,12 +188,15 @@ class TypingTestApp:
         self.root.geometry("1080x760")
         self.root.minsize(960, 680)
 
-        icon_file = resource_path("app_icon.ico")
-        if os.path.exists(icon_file):
-            try:
-                self.root.iconbitmap(default=icon_file)
-            except tk.TclError:
-                pass
+        try:
+            import tempfile as _tf
+            _ico_path = os.path.join(_tf.gettempdir(), "_typing_tester_icon.ico")
+            with open(_ico_path, "wb") as _f:
+                _f.write(base64.b64decode(_ICON_B64))
+            self.root.iconbitmap(_ico_path)
+            self.root.wm_iconbitmap(_ico_path)
+        except Exception:
+            pass
 
         self.theme_name = "dark"
         self.theme = Theme.get(self.theme_name)
@@ -293,10 +299,15 @@ class TypingTestApp:
         self.diff_box.pack(side="left", padx=(0, 18))
         self.diff_box.bind("<<ComboboxSelected>>", self._on_settings_change)
 
-        self.start_btn = tk.Button(self.ctrl, text="▶  Start Test", font=self.f_h,
+        self.start_btn = tk.Button(self.ctrl, text="▶  Start", font=self.f_h,
                                    relief="flat", padx=18, pady=6, cursor="hand2",
                                    command=self._start_test)
-        self.start_btn.pack(side="left", padx=(8, 8))
+        self.start_btn.pack(side="left", padx=(8, 4))
+
+        self.stop_btn = tk.Button(self.ctrl, text="⏹  Stop", font=self.f_h,
+                                  relief="flat", padx=18, pady=6, cursor="hand2",
+                                  command=self._stop_test, state="disabled")
+        self.stop_btn.pack(side="left", padx=(0, 8))
 
         self.reset_btn = tk.Button(self.ctrl, text="↻  Reset", font=self.f_body,
                                    relief="flat", padx=14, pady=6, cursor="hand2",
@@ -416,7 +427,8 @@ class TypingTestApp:
         style.configure("TEntry", fieldbackground=t["card_alt"], foreground=t["fg"],
                         bordercolor=t["border"])
 
-        for btn, accent in [(self.start_btn, t["accent"]), (self.reset_btn, t["card_alt"]),
+        for btn, accent in [(self.start_btn, t["accent"]), (self.stop_btn, t["bad"]),
+                            (self.reset_btn, t["card_alt"]),
                             (self.new_text_btn, t["card_alt"])]:
             btn.configure(bg=accent, fg="#ffffff" if accent == t["accent"] else t["fg"],
                           activebackground=t["card"], activeforeground=t["fg"],
@@ -546,6 +558,21 @@ class TypingTestApp:
         self.input_text.configure(state="normal")
         self.input_text.focus_set()
         self.input_title.configure(text="Type the reference text below — timer starts on first key!")
+        self.start_btn.configure(state="disabled")
+        self.stop_btn.configure(state="normal")
+
+    def _stop_test(self):
+        if not self.test_active and not self.test_finished:
+            return
+        if self._timer_id is not None:
+            self.root.after_cancel(self._timer_id)
+            self._timer_id = None
+        self.test_active = False
+        self.test_finished = True
+        self.input_text.configure(state="disabled")
+        self.input_title.configure(text="Test stopped by user.")
+        self.start_btn.configure(state="normal")
+        self.stop_btn.configure(state="disabled")
 
     def _reset(self):
         if self._timer_id is not None:
@@ -555,6 +582,8 @@ class TypingTestApp:
         self.test_finished = False
         self.input_text.configure(state="disabled")
         self.input_title.configure(text="Your Input (start typing after pressing Start)")
+        self.start_btn.configure(state="normal")
+        self.stop_btn.configure(state="disabled")
         self._new_test()
 
     # -------------------------------------------------------------- Keys
@@ -669,6 +698,8 @@ class TypingTestApp:
 
         self.input_text.configure(state="disabled")
         self.input_title.configure(text="Test complete — see analytics below.")
+        self.start_btn.configure(state="normal")
+        self.stop_btn.configure(state="disabled")
 
         typed = self._get_typed()
         ref = self.reference_text
